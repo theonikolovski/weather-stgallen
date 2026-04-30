@@ -1,7 +1,7 @@
 # Weather Scraper - St. Gallen
 
 Group project for XCamp Coding@HSG
-Authors: Theo and Tobias
+Authors: Theo Nikolovski and Tobias Nordström
 Language: Python
 
 ---
@@ -31,6 +31,24 @@ Saturday 02 May       Sunny    20 C     7 C          0%
 Source: wttr.in
 Scraped on: 2026-04-30 at 17:06
 Results saved to: weather_stgallen_2026-04-30.csv
+
+==============================================
+  Research Questions
+==============================================
+
+Q1: What is the warmest day this week?
+    Saturday 02 May with a max of 20 C
+
+Q2: What is the coldest day this week?
+    Thursday 30 Apr with a min of 3 C
+
+Q3: Which day has the highest chance of rain?
+    Thursday 30 Apr with 0% chance of rain
+
+Q4: What is the average maximum temperature over the 3 days?
+    18.0 C
+
+Temperature chart saved to: weather_chart_2026-04-30.png
 ```
 
 ---
@@ -57,9 +75,9 @@ Results saved to: weather_stgallen_2026-04-30.csv
 
 ## What Theo and Tobias did
 
-Theo was responsible for setting up the project, writing the data extraction logic (connecting to the website and reading the JSON response), and building the output table using pandas. Theo also added the CSV export feature so the data gets saved automatically each time the program runs.
+Theo was responsible for setting up the project, writing the data extraction logic (connecting to the website and reading the JSON response), building the output table using pandas, adding the research questions and analysis, and creating the temperature bar chart using matplotlib.
 
-Tobias was responsible for testing the program, checking that the output matched the real weather, and writing the documentation. Tobias also helped debug issues during development.
+Tobias was responsible for testing the program, checking that the output matched the real weather, writing the documentation, and helping debug issues during development. Tobias also added the CSV export feature so the data gets saved automatically each time the program runs.
 
 Both students followed the DataQuest web scraping tutorial together and adapted the approach to work with a real Swiss weather source instead of the US National Weather Service used in the tutorial.
 
@@ -163,6 +181,10 @@ During the XCamp Coding@HSG course we worked through a series of individual Pyth
 **Functions** were introduced later in the course. The entire program is wrapped inside a function called get_weather(). This keeps the code organized and makes it easy to run or reuse.
 
 **File handling** was one of the last skills we learned in the individual tasks, where we practiced writing to and reading from files. In this project we use it to save the weather results to a CSV file on the computer so the data is stored and can be opened later in Excel.
+
+**Data analysis** was something we wanted to go beyond the basics with. After collecting the weather data we added 4 research questions that the program answers automatically, such as which day is the warmest, which day has the highest chance of rain, and what the average maximum temperature is over the 3 days. This showed us how useful it is to store data in lists and work with numbers programmatically, which is exactly what data analysts do in real life.
+
+**Data visualization** was the final feature we added. We used the matplotlib library to create a bar chart showing the max and min temperatures for each day, which gets saved automatically as a PNG image. This taught us how to turn raw numbers into something visual that is much easier to understand at a glance.
 
 **Debugging** was also part of the course. During development we ran into issues with the website not returning data as expected and had to read error messages carefully and fix the code step by step.
 
