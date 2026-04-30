@@ -80,18 +80,20 @@ On Windows, search for "cmd" or "PowerShell" in the Start menu.
 
 Go to the GitHub page for this project. Click the green "Code" button at the top right, then click "Download ZIP". Save the ZIP file and unzip it somewhere easy to find, for example your Desktop.
 
+When you unzip the file, GitHub will create a folder called weather-stgallen-main. That is normal, the name always includes -main at the end when downloaded from GitHub.
+
 ### Step 3 - Install the required libraries
 
 The program uses two Python libraries that need to be installed before running. Open your terminal and navigate to the project folder. If you unzipped it on the Desktop, type:
 
 On Mac:
 ```
-cd ~/Desktop/weather-stgallen
+cd ~/Desktop/weather-stgallen-main
 ```
 
 On Windows:
 ```
-cd C:\Users\YourName\Desktop\weather-stgallen
+cd C:\Users\YourName\Desktop\weather-stgallen-main
 ```
 
 Then run this command to install the libraries:
