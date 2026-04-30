@@ -1,7 +1,7 @@
 # Weather Scraper - St. Gallen
 
 Group project for XCamp Coding@HSG
-Authors: Theo and Tobias
+Authors: Theo Nikolovski and Tobias Nordström
 Language: Python
 
 ---
