@@ -1,7 +1,7 @@
 # Weather Scraper - St. Gallen
 
 Group project for XCamp Coding@HSG
-Authors: Theo Nikolovski and Tobias Nordström
+Authors: Theo and Tobias
 Language: Python
 
 ---
@@ -129,6 +129,10 @@ The CSV file will be named something like weather_stgallen_2026-04-30.csv and ca
 This project scrapes weather data from wttr.in, a free and publicly available weather service that does not require an account or API key.
 
 The URL we use is: https://wttr.in/St.Gallen?format=j1
+
+We considered using AccuWeather, which was suggested in the project brief, but it turned out not to be possible for two reasons. First, AccuWeather loads its data dynamically using JavaScript, which means when Python requests the page it only receives an empty HTML shell with no weather data in it. BeautifulSoup cannot run JavaScript so it would see nothing useful. Second, AccuWeather actively blocks automated requests and their terms of service forbid scraping since they sell their data commercially.
+
+wttr.in is a better fit for this project because it is specifically designed to be used the way we use it, it is completely free and open, and it provides the data in clean JSON format which Python can read directly. The weather data it provides comes from the same reliable underlying sources used by large weather platforms.
 
 ---
 
