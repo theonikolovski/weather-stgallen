@@ -7,13 +7,17 @@
 # - Gets the JSON weather data for St. Gallen
 # - Shows a 3-day forecast in a clean table
 # - Answers research questions about the forecast
+# - Shows detailed pandas statistics
 # - Saves results to a CSV file
-# - Creates a temperature chart as an image
+# - Creates a matplotlib bar chart
+# - Creates a seaborn chart for a nicer visualization
 # ============================================
 
 import requests
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from datetime import datetime, timedelta
 
 def get_weather():
@@ -45,7 +49,7 @@ def get_weather():
     min_temps = []
     rain_chances = []
 
-    # we also need plain numbers for analysis and the chart
+    # we also need plain numbers for analysis and the charts
     max_temps_num = []
     min_temps_num = []
     rain_chances_num = []
@@ -99,6 +103,30 @@ def get_weather():
     print("Results saved to:", filename)
 
     # ============================================
+    # Pandas Statistics
+    # ============================================
+    # using pandas and numpy to get proper stats on the temperature data
+    # this is the kind of analysis we learned during the course
+
+    # building a numeric dataframe so pandas can run stats on it
+    stats_df = pd.DataFrame({
+        "Max Temp (C)": max_temps_num,
+        "Min Temp (C)": min_temps_num,
+        "Rain Chance (%)": rain_chances_num
+    })
+
+    print("\n==============================================")
+    print("  Temperature Statistics (pandas)")
+    print("==============================================\n")
+    print(stats_df.describe())
+
+    # using numpy to calculate the temperature range for each day
+    temp_ranges = np.array(max_temps_num) - np.array(min_temps_num)
+    print("\nTemperature range per day (Max - Min):")
+    for i in range(len(dates)):
+        print("    " + dates[i] + ": " + str(temp_ranges[i]) + " C")
+
+    # ============================================
     # Research Questions
     # ============================================
     # we wanted to do more than just collect the data
@@ -129,10 +157,9 @@ def get_weather():
     print("    " + str(round(avg_max, 1)) + " C\n")
 
     # ============================================
-    # Temperature Chart
+    # Chart 1 - Matplotlib Bar Chart
     # ============================================
-    # creating a simple bar chart showing max and min temps for each day
-    # this makes it easy to see the temperature range at a glance
+    # classic bar chart showing max and min temps side by side
 
     short_dates = [(today + timedelta(days=i)).strftime("%a %d %b") for i in range(len(dates))]
 
@@ -163,10 +190,34 @@ def get_weather():
 
     plt.tight_layout()
 
-    # saving the chart as an image file
+    # saving the matplotlib chart
     chart_filename = "weather_chart_" + datetime.now().strftime("%Y-%m-%d") + ".png"
     plt.savefig(chart_filename)
     print("Temperature chart saved to:", chart_filename)
+
+    # ============================================
+    # Chart 2 - Seaborn Chart
+    # ============================================
+    # seaborn gives us a nicer looking visualization
+    # we learned seaborn during the course and wanted to use it here too
+
+    # building a long format dataframe so seaborn can plot both max and min
+    seaborn_data = pd.DataFrame({
+        "Date": short_dates * 2,
+        "Temperature (C)": max_temps_num + min_temps_num,
+        "Type": ["Max Temp"] * len(short_dates) + ["Min Temp"] * len(short_dates)
+    })
+
+    plt.figure(figsize=(9, 5))
+    sns.barplot(data=seaborn_data, x="Date", y="Temperature (C)", hue="Type",
+                palette=["#e07b54", "#5b9bd5"])
+    plt.title("3-Day Temperature Forecast - St. Gallen (Seaborn)", fontsize=13)
+    plt.tight_layout()
+
+    # saving the seaborn chart
+    seaborn_filename = "weather_chart_seaborn_" + datetime.now().strftime("%Y-%m-%d") + ".png"
+    plt.savefig(seaborn_filename)
+    print("Seaborn chart saved to:", seaborn_filename)
 
 # this starts the program
 get_weather()
