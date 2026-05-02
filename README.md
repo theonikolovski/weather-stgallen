@@ -12,9 +12,9 @@ This program automatically fetches the 3-day weather forecast for St. Gallen, Sw
 
 It uses a technique called web scraping. Web scraping means the program connects to a website, downloads its data, and extracts only the information we need. In this case, we connect to wttr.in, a free and public weather service, and we extract the date, weather description, maximum temperature, minimum temperature, and chance of rain for each of the next 3 days.
 
-Once the data is collected the program does three things with it. First it displays the forecast in a clean table in the terminal. Second it answers 4 research questions about the data, such as which day is the warmest, which day has the highest chance of rain, and what the average maximum temperature is. Third it creates a bar chart showing the max and min temperatures for each day and saves it as a PNG image file.
+Once the data is collected the program does several things with it. First it displays the forecast in a clean table in the terminal. Second it runs a full statistical analysis using pandas and numpy, showing mean, min, max and the temperature range for each day. Third it answers 4 research questions about the data, such as which day is the warmest and which day has the highest chance of rain. Finally it creates two charts and saves them as PNG image files, one using matplotlib and one using seaborn for a nicer visualization.
 
-Finally the program saves all the results to a CSV file on your computer. A CSV file is a simple spreadsheet format that can be opened directly in Microsoft Excel or Google Sheets. This is useful because it means the weather data is not just printed once and lost. It gets saved with today's date in the filename, so you can collect multiple days of data over time and analyze it later. This is exactly how data analysts work in real life: they automate the collection of data and store it so they can study trends, compare days, or create charts.
+The program also saves all the results to a CSV file on your computer. A CSV file is a simple spreadsheet format that can be opened directly in Microsoft Excel or Google Sheets. This is useful because it means the weather data is not just printed once and lost. It gets saved with today's date in the filename, so you can collect multiple days of data over time and analyze it later. This is exactly how data analysts work in real life: they automate the collection of data and store it so they can study trends, compare days, or create charts.
 
 Example of what the terminal output looks like:
 
@@ -33,6 +33,25 @@ Scraped on: 2026-04-30 at 17:06
 Results saved to: weather_stgallen_2026-04-30.csv
 
 ==============================================
+  Temperature Statistics (pandas)
+==============================================
+
+       Max Temp (C)  Min Temp (C)  Rain Chance (%)
+count      3.000000      3.000000         3.000000
+mean      18.000000      4.000000         0.000000
+std        1.732051      2.645751         0.000000
+min       17.000000      2.000000         0.000000
+25%       17.000000      2.500000         0.000000
+50%       17.000000      3.000000         0.000000
+75%       18.500000      5.000000         0.000000
+max       20.000000      7.000000         0.000000
+
+Temperature range per day (Max - Min):
+    Thursday 30 Apr: 14 C
+    Friday 01 May: 15 C
+    Saturday 02 May: 13 C
+
+==============================================
   Research Questions
 ==============================================
 
@@ -49,6 +68,7 @@ Q4: What is the average maximum temperature over the 3 days?
     18.0 C
 
 Temperature chart saved to: weather_chart_2026-04-30.png
+Seaborn chart saved to: weather_chart_seaborn_2026-04-30.png
 ```
 
 ---
@@ -65,11 +85,15 @@ Temperature chart saved to: weather_chart_2026-04-30.png
 
 5. It prints the table in the terminal in a clean and readable format.
 
-6. It answers 4 research questions about the forecast data, for example which day is the warmest, which day has the highest chance of rain, and what the average maximum temperature is over the 3 days.
+6. It runs a full statistical analysis using pandas .describe() and numpy to calculate mean, min, max, standard deviation and the daily temperature range.
 
-7. It creates a bar chart showing the max and min temperatures for each day using matplotlib and saves it as a PNG image file.
+7. It answers 4 research questions about the forecast data, for example which day is the warmest, which day has the highest chance of rain, and what the average maximum temperature is over the 3 days.
 
-8. It saves the full table as a CSV file with today's date in the filename, for example: weather_stgallen_2026-04-30.csv. This file can be opened in Excel.
+8. It creates a bar chart using matplotlib and saves it as a PNG image file.
+
+9. It creates a second nicer looking chart using seaborn and saves it as a separate PNG image file.
+
+10. It saves the full table as a CSV file with today's date in the filename, for example: weather_stgallen_2026-04-30.csv. This file can be opened in Excel.
 
 ---
 
@@ -123,7 +147,7 @@ cd C:\Users\YourName\Desktop\weather-stgallen-main
 Then run this command to install the libraries:
 
 ```
-pip install requests pandas matplotlib
+pip install requests pandas numpy matplotlib seaborn
 ```
 
 You only need to do this once.
@@ -146,7 +170,7 @@ The CSV file will be named something like weather_stgallen_2026-04-30.csv and ca
 
 - Python 3 or newer
 - An internet connection
-- The following Python libraries: requests, pandas, matplotlib (installed in Step 3)
+- The following Python libraries: requests, pandas, numpy, matplotlib, seaborn (installed in Step 3)
 
 ---
 
@@ -182,9 +206,11 @@ During the XCamp Coding@HSG course we worked through a series of individual Pyth
 
 **File handling** was one of the last skills we learned in the individual tasks, where we practiced writing to and reading from files. In this project we use it to save the weather results to a CSV file on the computer so the data is stored and can be opened later in Excel.
 
-**Data analysis** was something we wanted to go beyond the basics with. After collecting the weather data we added 4 research questions that the program answers automatically, such as which day is the warmest, which day has the highest chance of rain, and what the average maximum temperature is over the 3 days. This showed us how useful it is to store data in lists and work with numbers programmatically, which is exactly what data analysts do in real life.
+**numpy** was something we learned and used in the data science tasks. In this project we use numpy to calculate the temperature range for each day by subtracting the min temperature array from the max temperature array. numpy makes working with numbers and arrays much faster and cleaner than doing it manually.
 
-**Data visualization** was the final feature we added. We used the matplotlib library to create a bar chart showing the max and min temperatures for each day, which gets saved automatically as a PNG image. This taught us how to turn raw numbers into something visual that is much easier to understand at a glance.
+**seaborn** was a library we learned during the data visualization tasks in the course. We used it to create a second chart that looks cleaner and more professional than the standard matplotlib chart. Seaborn is built on top of matplotlib and makes it much easier to create good looking visualizations with less code.
+
+**pandas data analysis** went beyond just displaying data. We used the pandas .describe() method to generate a full statistical summary of the temperature data including mean, standard deviation, min, max and percentiles. This is exactly how data analysts explore datasets in real life.
 
 **Debugging** was also part of the course. During development we ran into issues with the website not returning data as expected and had to read error messages carefully and fix the code step by step.
 
@@ -199,4 +225,5 @@ Overall this project required us to combine almost every skill from the course i
 | weather.py | The main Python program that scrapes and saves the weather data |
 | README.md | This documentation file explaining the project and how to run it |
 | weather_stgallen_YYYY-MM-DD.csv | The CSV file generated when you run the program (opens in Excel) |
-| weather_chart_YYYY-MM-DD.png | The temperature bar chart generated when you run the program |
+| weather_chart_YYYY-MM-DD.png | The matplotlib temperature bar chart generated when you run the program |
+| weather_chart_seaborn_YYYY-MM-DD.png | The seaborn temperature chart generated when you run the program |
