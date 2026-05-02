@@ -132,7 +132,7 @@ When you unzip the file, GitHub will create a folder called weather-stgallen-mai
 
 ### Step 3 - Install the required libraries
 
-The program uses two Python libraries that need to be installed before running. Open your terminal and navigate to the project folder. If you unzipped it on the Desktop, type:
+The program uses five Python libraries that need to be installed before running. Open your terminal and navigate to the project folder. If you unzipped it on the Desktop, type:
 
 On Mac:
 ```
